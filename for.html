@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/RegistrationForm.css">
+    <title>Registration Form</title>
+</head>
+<body>
+    <div class="reg-form">
+        <form action="/post" method="post">
+            <div class="form-group">
+                <div class="title">
+                    <h1>Get Started</h1>
+                </div>
+                <div class="form-input">
+                    <input class="floating-input" type="text" name="name" placeholder="" required>
+                    <label for="name" class="floating-label">Name</label>
+                </div>
+                <div class="form-input">
+                    <input class="floating-input" type="email" name="email" placeholder="" required>
+                    <label for="email" class="floating-label">Email</label>
+                </div>
+                <div class="form-input">
+                    <input class="floating-input" type="number" name="power" placeholder="" required min="0" max="1000" step="0.01">
+                    <label for="power" class="floating-label">Power that can be transferred</label>
+                </div>
+
+                <!-- Hidden Fields for Latitude & Longitude -->
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+
+                <div class="action-btn">
+                    <button class="btn-reg" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Function to get user's location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    document.getElementById("latitude").value = position.coords.latitude;
+                    document.getElementById("longitude").value = position.coords.longitude;
+                }, function (error) {
+                    console.log("Error getting location: ", error);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Call getLocation when the page loads
+        window.onload = getLocation;
+    </script>
+
+</body>
+</html>
